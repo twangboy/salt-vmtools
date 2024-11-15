@@ -7,7 +7,7 @@ function setUpScript {
     Reset-Environment *> $null
     Write-Done
 
-    $MinionVersion = "3005.1-4"
+    $MinionVersion = "latest"
     Write-Host "Installing salt ($MinionVersion): " -NoNewline
     function Get-GuestVars { "master=gv_master id=gv_minion" }
     Install *> $null
@@ -32,22 +32,16 @@ function test_status_installed {
     return 0
 }
 
-function test_salt_binary_present {
-    # Is the salt binary present
-    if (!(Test-Path $salt_bin)) { return 1 }
-    return 0
-}
-
 function test_ssm_binary_present {
     # Is the SSM Binary present
     if (!(Test-Path $ssm_bin)) { return 1 }
     return 0
 }
 
-function test_bat_files_present {
+function test_binaries_present {
     # Is salt-call.bat present
-    if (!(Test-Path "$salt_dir\salt-call.bat")) { return 1 }
-    if (!(Test-Path "$salt_dir\salt-minion.bat")) { return 1 }
+    if (!(Test-Path "$salt_dir\salt-call.exe")) { return 1 }
+    if (!(Test-Path "$salt_dir\salt-minion.exe")) { return 1 }
     return 0
 }
 
